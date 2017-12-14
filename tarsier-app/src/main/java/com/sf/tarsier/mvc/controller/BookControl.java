@@ -23,16 +23,14 @@ public class BookControl extends BaseController{
 	@RequestMapping(value = "/test", method = RequestMethod.POST)
 	@ResponseBody
 	public Result<Integer> test(Book book) {
-		System.out.println("sdfsd" );
-		logger.info("..................."+ bookService.selectTest());
-		System.out.println(bookService.selectTest());
+		logger.info("sdfsd..................."+ bookService.selectTest());
 		return ResultUtil.success(bookService.selectTest());
 	}
 	
 	@RequestMapping("/show")
 	@ResponseBody
 	public String show() {
-		System.out.println("....xxxxxxx...............");
+		logger.info("....xxxxxxx...............");
 		return "show替顶替仍";
 	}
 

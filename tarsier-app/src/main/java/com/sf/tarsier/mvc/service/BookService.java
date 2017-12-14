@@ -24,10 +24,10 @@ public class BookService extends BaseService<Object> {
 	 */
 	public int selectTest() {
 		try {
-			System.out.println("go "+pass);
+			logger.info("@value "+pass);
 			int val = (int) getBaseDAO().selectOne("BookMapper.selectTest", null);
 			List<?> vals = (List<?>) getBaseDAO().selectList("BookMapper.selectMap", null);
-			System.out.println(JSON.toJSONString(vals));
+			logger.info("result is " + JSON.toJSONString(vals));
 			return val;
 		} catch (Exception e) {
 			logger.error("测试信息失败", e);
