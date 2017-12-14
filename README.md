@@ -10,7 +10,7 @@ private T obj;
 
 
 测试接口(POST)：http://10.2.4.33:8080/book/test
-入参：空
+入参：{"id":"123","bookName":"sfwer"}
 出参：{"success":true,"errorCode":null,"errorMessage":null,"date":"2017-12-14 19:54:47","obj":1}
 
 测试接口(POST)：http://10.2.4.23:8080/book/getNum

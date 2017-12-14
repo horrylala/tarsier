@@ -2,10 +2,12 @@ package com.sf.tarsier.mvc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.sf.tarsier.mvc.service.BookService;
 import com.sf.tarsier.mvc.system.base.BaseController;
 import com.sf.tarsier.mvc.system.entity.Book;
@@ -22,9 +24,9 @@ public class BookControl extends BaseController{
 	
 	@RequestMapping(value = "/test", method = RequestMethod.POST)
 	@ResponseBody
-	public Result<Integer> test(Book book) {
-		logger.info("sdfsd..................."+ bookService.selectTest());
-		return ResultUtil.success(bookService.selectTest());
+	public Result<Integer> test(@RequestBody Book book) {
+		logger.info("入参..................."+ JSON.toJSONString(book));
+		return ResultUtil.success(bookService.selectTest(book));
 	}
 	
 	@RequestMapping("/show")
