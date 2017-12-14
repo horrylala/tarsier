@@ -1,7 +1,6 @@
-var api = require("api.js");
-var util = require('../utils/util.js');
-var config = require('../config.js');
-var header = getApp().globalData.header
+const util = require('../utils/util')
+const config = require('../config')
+
 // requestData
 function requestData(url, data, successCallback, errorCallback, completeCallback) {
   wx.request({
@@ -10,7 +9,7 @@ function requestData(url, data, successCallback, errorCallback, completeCallback
     // login: true,
     method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
     // header: {}, // 设置请求的 header
-    header: { "Content-Type": "application/x-www-form-urlencoded", 'Cookie': getApp().globalData.sessionId },
+    header: { "Content-Type": "application/json"},
     success: function (res) {
       // success
       console.log('response data: ', res);
@@ -33,6 +32,10 @@ function requestData(url, data, successCallback, errorCallback, completeCallback
       return util.isFunction(completeCallback) && completeCallback(res);
     }
   })
+}
+
+function getTest(data, successCallback, errorCallback) {
+  return requestData(`${config.API_BASE}/book/test`, data, successCallback, errorCallback)
 }
 
 // requestXCX (增加GET/POST等请求方法和Content-Type设置)  == jt add
@@ -268,5 +271,6 @@ function myEnrollList(data, successCallback, errorCallback, completeCallback) {
 
 module.exports = {
   getVoteData: getVoteData,
-  getCosAuth: getCosAuth
+  getCosAuth: getCosAuth,
+  getTest: getTest
 }
