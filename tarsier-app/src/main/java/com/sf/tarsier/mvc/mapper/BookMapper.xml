@@ -9,7 +9,7 @@
 	</select>
 	
 	<select id="selectMap" resultType="map">
-		select * from sys_code
+		select * from test
 	</select>
 	
 </mapper>   
