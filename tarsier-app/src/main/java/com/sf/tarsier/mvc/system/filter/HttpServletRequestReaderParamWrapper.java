@@ -9,14 +9,31 @@ import java.nio.charset.Charset;
 
 import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
+import org.apache.log4j.Logger;
+
+import com.sf.tarsier.mvc.system.entity.LoggerType;
+
+
 /**
- * post时，读取并备份流数据入参
+ * 描述：
+ * 
+ * <pre>HISTORY
+ * ****************************************************************************
+ *  ID   DATE           PERSON          REASON
+ *  1    2017年8月20日      01238551         Create
+ * ****************************************************************************
+ * </pre>
+ * @author 01238551
+ * @since 1.0
  */
-public class HttpServletRequestReaderParamWrapper extends HttpServletRequestWrapper{
+public class HttpServletRequestReaderParamWrapper extends HttpServletRequestWrapper {
 	
+	private static final Logger logger = Logger.getLogger(LoggerType.FILTER);
+
 	private final byte[] body;
 	
 	public HttpServletRequestReaderParamWrapper(HttpServletRequest request) {
@@ -26,30 +43,30 @@ public class HttpServletRequestReaderParamWrapper extends HttpServletRequestWrap
 
 	@Override
 	public ServletInputStream getInputStream() throws IOException {
-		final ByteArrayInputStream ba = new ByteArrayInputStream(body);
-		
-		return new ServletInputStream() {
-			
-			@Override
-			public int read() throws IOException {
-				return ba.read();
-			}
-			
-			@Override
-			public void setReadListener(ReadListener listener) {
-				
-			}
-			
-			@Override
-			public boolean isReady() {
-				return false;
-			}
-			
-			@Override
-			public boolean isFinished() {
-				return false;
-			}
-		};
+		final ByteArrayInputStream bais = new ByteArrayInputStream(body);
+
+        return new ServletInputStream() {
+
+            @Override
+            public int read() throws IOException {
+                return bais.read();
+            }
+
+            @Override
+            public boolean isFinished() {
+                return false;
+            }
+
+            @Override
+            public boolean isReady() {
+                return false;
+            }
+
+            @Override
+            public void setReadListener(ReadListener readListener) {
+            	//nonthing to do
+            }
+        };
 	}
 
 	@Override
@@ -58,22 +75,22 @@ public class HttpServletRequestReaderParamWrapper extends HttpServletRequestWrap
 	}
 
 	/**
-	 * 获取请求内容
-	 * @param request
-	 * @return
-	 */
-	public static String getBodyString(HttpServletRequest request) {
-		StringBuilder sb = new StringBuilder();
-		try (InputStream is = request.getInputStream();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));){
-			String line = "";
-			while(null != (line = reader.readLine())) {
-				sb.append(line);
-			}
+     * 获取请求Body
+     *
+     * @param request
+     * @return
+     */
+    public static String getBodyString(ServletRequest request) {
+    	StringBuilder sb = new StringBuilder();
+    	try (InputStream inputStream = request.getInputStream();
+        	BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));){
+    		String line = "";
+            while ((line = reader.readLine()) != null) {
+                sb.append(line);
+            }
 		} catch (IOException e) {
-			// handle exception
+			logger.error("获取请求Body异常",e);
 		}
-		return sb.toString();
-	}
-
+        return sb.toString();
+    }
 }

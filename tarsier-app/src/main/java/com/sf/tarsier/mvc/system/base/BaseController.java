@@ -24,7 +24,7 @@ import com.sf.tarsier.mvc.system.util.ResultUtil;
  */
 public class BaseController {
 	
-	protected static Logger logger = LoggerFactory.getLogger(LoggerType.COMMON);
+	private static final Logger logger = LoggerFactory.getLogger(LoggerType.COMMON);
 	
 	/**
 	 * 时间格式绑定 yyyy-MM-dd

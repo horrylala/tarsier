@@ -1,17 +1,11 @@
 package com.sf.tarsier.mvc.system.entity;
 
-import java.io.Serializable;
-
 /**
  * 返回结果公共类
  * @param <T>
  */
-public class Result<T> implements Serializable {
+public class Result<T> {
 
-	private static final long serialVersionUID = 1L;
-	
-	public Result(){}
-	
 	public Result(boolean success)
 	{
 		this.success = success;

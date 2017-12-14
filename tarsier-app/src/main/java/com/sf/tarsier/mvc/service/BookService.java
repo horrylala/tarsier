@@ -15,9 +15,9 @@ import com.sf.tarsier.mvc.system.entity.Book;
 import com.sf.tarsier.mvc.system.entity.LoggerType;
 
 @Service("bookService")
-public class BookService extends BaseService<Object> {
+public class BookService extends BaseService {
 	
-	protected static Logger logger = LoggerFactory.getLogger(LoggerType.COMMON);
+	private static final Logger logger = LoggerFactory.getLogger(LoggerType.COMMON);
 	
 	@Value("${datasource.password}")
 	private String pass;

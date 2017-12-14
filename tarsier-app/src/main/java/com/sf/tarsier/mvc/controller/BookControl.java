@@ -1,5 +1,7 @@
 package com.sf.tarsier.mvc.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +13,7 @@ import com.alibaba.fastjson.JSON;
 import com.sf.tarsier.mvc.service.BookService;
 import com.sf.tarsier.mvc.system.base.BaseController;
 import com.sf.tarsier.mvc.system.entity.Book;
+import com.sf.tarsier.mvc.system.entity.LoggerType;
 import com.sf.tarsier.mvc.system.entity.Result;
 import com.sf.tarsier.mvc.system.util.ResultUtil;
 
@@ -18,6 +21,8 @@ import com.sf.tarsier.mvc.system.util.ResultUtil;
 @Controller
 @RequestMapping("/book")
 public class BookControl extends BaseController{
+	
+	private static final Logger logger = LoggerFactory.getLogger(LoggerType.COMMON);
 	
 	@Autowired
 	private BookService bookService;

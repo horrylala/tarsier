@@ -24,9 +24,9 @@ import com.sf.tarsier.mvc.system.entity.LoggerType;
  */
 public class ServletContextFilter implements Filter {
 
-	protected static Logger logger = LoggerFactory.getLogger(LoggerType.FILTER);
+	private static final Logger logger = LoggerFactory.getLogger(LoggerType.FILTER);
 
-	private static String servletName = "";
+	private String servletName = "";
 
 	public void init(FilterConfig config) throws ServletException {
 		//设置服务启动时间和启动容器信息
@@ -34,10 +34,6 @@ public class ServletContextFilter implements Filter {
 		logger.info("链接拦截器 init .... servletName=["+servletName+"]");
 	}
 
-	@Override
-	public void destroy() {
-	}
-	
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 		long begin = System.currentTimeMillis();
@@ -99,6 +95,11 @@ public class ServletContextFilter implements Filter {
 			sb.append(" 耗时：," + (end - begin) + ",ms ");
 			logger.debug(sb.toString());
 		}
+	}
+
+	@Override
+	public void destroy() {
+		logger.debug("销毁对象");
 	}
 	
 	/**
