@@ -36,9 +36,9 @@ public class BookControl extends BaseController{
 	
 	@RequestMapping(value="getNum",method=RequestMethod.POST)
 	@ResponseBody
-	public Result<Integer> getNum() {
+	public Result<String> getNum() {
 		logger.info("getNum");
-		return ResultUtil.success(bookService.getCount());
+		return ResultUtil.success("统计结果："+String.valueOf(bookService.getCount()));
 	}
 
 }
