@@ -8,8 +8,22 @@
 		 select 1 from dual
 	</select>
 	
-	<select id="selectMap" resultType="map">
-		select * from test
+	<select id="selectMap" resultType="map" parameterType="com.sf.tarsier.mvc.system.entity.Book">
+		select * from test where 1=1
+		<if test="bookName !=null and bookName !=''">
+			and name=#{bookName,jdbcType=VARCHAR}
+		</if>
+	</select>
+	
+	<select id="selectFromMap" resultType="map" parameterType="map">
+		select * from test where 1=1
+		<if test="bookName !=null and bookName !=''">
+			and name=#{bookName,jdbcType=VARCHAR}
+		</if>
+	</select>
+	
+	<select id="getCount" resultType="int">
+		select count(1) from test
 	</select>
 	
 </mapper>   
