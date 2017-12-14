@@ -33,5 +33,12 @@ public class BookControl extends BaseController{
 		logger.info("....xxxxxxx...............");
 		return "show替顶替仍";
 	}
+	
+	@RequestMapping(value="getNum",method=RequestMethod.POST)
+	@ResponseBody
+	public Result<Integer> getNum() {
+		logger.info("getNum");
+		return ResultUtil.success(bookService.getCount());
+	}
 
 }

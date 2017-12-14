@@ -26,9 +26,21 @@ public class BookService extends BaseService<Object> {
 		try {
 			logger.info("@value "+pass);
 			int val = (int) getBaseDAO().selectOne("BookMapper.selectTest", null);
-			List<?> vals = (List<?>) getBaseDAO().selectList("BookMapper.selectMap", null);
+			List<?> vals =  getBaseDAO().selectList("BookMapper.selectMap", null);
 			logger.info("result is " + JSON.toJSONString(vals));
 			return val;
+		} catch (Exception e) {
+			logger.error("测试信息失败", e);
+		}
+		return 0;
+	}
+	
+	
+	public int getCount() {
+		try {
+			int count = (int) getBaseDAO().selectOne("BookMapper.getCount", null);
+			logger.info("result is {}" , JSON.toJSONString(count));
+			return count;
 		} catch (Exception e) {
 			logger.error("测试信息失败", e);
 		}
