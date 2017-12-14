@@ -27,16 +27,18 @@ public class BookService extends BaseService<Object> {
 	 */
 	public int selectTest(Book book) {
 		try {
-			logger.info("@value "+pass);
+			logger.info("@value {}", pass);
 			int val = (int) getBaseDAO().selectOne("BookMapper.selectTest", null);
-			List<?> vals = (List<?>) getBaseDAO().selectList("BookMapper.selectMap", book);
-			logger.info("result is " + JSON.toJSONString(vals));
+			List<?> vals = getBaseDAO().selectList("BookMapper.selectMap", book);
+			String result = JSON.toJSONString(vals);
+			logger.info("firist result is {}", result);
 			
 			Map<String,String> tmp = new HashMap<>();
 			tmp.put("id", String.valueOf(book.getId()));
 			tmp.put("bookName", book.getBookName());
-			List<?> vals2 = (List<?>) getBaseDAO().selectList("BookMapper.selectFromMap", tmp);
-			logger.info("result2 is " + JSON.toJSONString(vals2));
+			List<?> vals2 = getBaseDAO().selectList("BookMapper.selectFromMap", tmp);
+			result = JSON.toJSONString(vals2);
+			logger.info("second result is {}", result);
 			return val;
 		} catch (Exception e) {
 			logger.error("测试信息失败", e);
@@ -48,7 +50,8 @@ public class BookService extends BaseService<Object> {
 	public int getCount() {
 		try {
 			int count = (int) getBaseDAO().selectOne("BookMapper.getCount", null);
-			logger.info("result is {}" , JSON.toJSONString(count));
+			String result = JSON.toJSONString(count);
+			logger.info("result is {}" , result);
 			return count;
 		} catch (Exception e) {
 			logger.error("测试信息失败", e);
