@@ -39,7 +39,7 @@ public class EncryptablePropertyPlaceholderConfigurer extends PropertyPlaceholde
 	
 	public static void main(String[] args) {
 		try {
-			System.out.println(ConfigTools.encrypt("123456"));
+			System.out.println(ConfigTools.encrypt("sf123456"));
 			System.out.println(ConfigTools.decrypt("Biyu5YzU+6sxDRbmWEa3B2uUcImzDo0BuXjTlL505+/pTb+/0Oqd3ou1R6J8+9Fy3CYrM18nBDqf6wAaPgUGOg=="));
 		} catch (Exception e) {
 			logger.error("读取配置文件进行解密时出错main", e);
