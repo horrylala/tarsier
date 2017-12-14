@@ -1,6 +1,6 @@
-# tarsier test
+ï»¿# tarsier test
 
-Í³Ò»³ö²Î¸ñÊ½£ºResult
+ç»Ÿä¸€å‡ºå‚æ ¼å¼ï¼šResult
 private boolean success = false;
 private String errorCode;
 private String errorMessage;
@@ -9,10 +9,10 @@ private T obj;
 
 
 
-²âÊÔ½Ó¿Ú(POST)£ºhttp://10.2.4.33:8080/book/test
-Èë²Î£º¿Õ
-³ö²Î£º{"success":true,"errorCode":null,"errorMessage":null,"date":"2017-12-14 19:54:47","obj":1}
+æµ‹è¯•æ¥å£(POST)ï¼šhttp://10.2.4.33:8080/book/test
+å…¥å‚ï¼šç©º
+å‡ºå‚ï¼š{"success":true,"errorCode":null,"errorMessage":null,"date":"2017-12-14 19:54:47","obj":1}
 
-²âÊÔ½Ó¿Ú(POST)£ºhttp://10.2.4.23:8080/book/getNum
-Èë²Î£º¿Õ
-³ö²Î£º{"success":true,"errorCode":null,"errorMessage":null,"date":"2017-12-14 19:54:47","obj":2}
+æµ‹è¯•æ¥å£(POST)ï¼šhttp://10.2.4.23:8080/book/getNum
+å…¥å‚ï¼šç©º
+å‡ºå‚ï¼š{"success":true,"errorCode":null,"errorMessage":null,"date":"2017-12-14 19:54:47","obj":2}
