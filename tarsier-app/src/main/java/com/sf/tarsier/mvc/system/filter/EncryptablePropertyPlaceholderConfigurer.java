@@ -32,6 +32,7 @@ public class EncryptablePropertyPlaceholderConfigurer extends PropertyPlaceholde
 		    		props.setProperty(entry.getKey().toString(), ConfigTools.decrypt(entry.getValue().toString().substring(4)));
 		    	}
 		    }
+		    super.processProperties(beanFactory, props);
 		} catch (Exception e) {
 			logger.error("读取配置文件进行解密时出错", e);
 		}
