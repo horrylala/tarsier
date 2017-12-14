@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="BookMapper" >
+
+	<!-- 测试查询 -->
+	<select id="selectTest" resultType="int">
+		 select 1 from dual
+	</select>
+	
+	<select id="selectMap" resultType="map">
+		select * from sys_code
+	</select>
+	
+</mapper>   

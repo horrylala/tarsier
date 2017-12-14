@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 整个配置文件的根节点，声明常用的命名空间定义，下面包含一个或多个bean元素 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+			
+	<!-- 定时任务列表 -->
+	<!-- <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="testJobTrigger"/>
+			</list>
+		</property>
+	</bean> -->
+	
+	<!-- 测试任务 -->
+	<!-- <bean id="testJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="testJob"></property>
+		<property name="targetMethod" value="execJob"></property>
+		<property name="concurrent" value="false"></property>
+	</bean>
+	<bean id="testJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="testJobDetail"></property>
+		<property name="startDelay" value="0"></property>
+		<property name="cronExpression" value="${testJobCronExpression}"></property>
+	</bean> -->
+
+</beans>
