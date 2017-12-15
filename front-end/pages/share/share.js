@@ -6,7 +6,7 @@ Page({
   },
   saveQRCode: function () {
     wx.saveImageToPhotosAlbum({
-      filePath: `http://10.2.4.33/codeImg/${this.data.QRImageUrl}`,
+      filePath: `http://10.2.4.23/codeImg/${this.data.QRImageUrl}`,
       success(res) {
       }
     })

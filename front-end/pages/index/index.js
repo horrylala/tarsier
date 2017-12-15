@@ -13,10 +13,10 @@ Page({
      userCount: 0,
      freeCount: 0,
      completePercent: 0,
-     deadline: '2018-01-06 11:17:11',
+     deadline: '',
      marketBase: {
-      mktId: 'c40dfd11-e140-11e7-b870-000000005aad',
-      mktNameShow: 'test',
+      mktId: '',
+      mktNameShow: '',
       dailyMinPackages: null,
       weightMin: null,
       weightMax: null,
@@ -26,14 +26,7 @@ Page({
       groupDuration: 0,
       useRequire: 0
      },
-     users: [{
-      imageUrl: 'https://qq.com/sdfwe/ewrs',
-      userName: 'sdfds'
-     },
-     {
-      imageUrl: 'https://qq.com/sdfwe/ewrs',
-      userName: 'sdfds'
-     }]
+     users: []
    }
   },
   //事件处理函数
@@ -56,7 +49,6 @@ Page({
         })
       }
     } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
         success: res => {
           app.globalData.userInfo = res.userInfo
@@ -68,12 +60,24 @@ Page({
       })
     }
     if (this.userInfo !== null || this.userInfo !== undefined) {
-      cargoService.getCargoInfo({mktId: 'c40dfd11-e140-11e7-b870-000000005aad'}, (res) => {
+      cargoService.getCargoInfo({mktId: ''}, (res) => {
         util.log(res.data.obj)
         let response = res.data.obj
         this.setData({
           mktData: res.data.obj,
           deadline: response.deadline
+        })
+        let arr = this.data.mktData.deadline.split('-')
+        let month = arr[1]
+        let date = arr[2]
+        if (month.charAt(0) === '0') {
+          month = month.charAt(1)
+        }
+        if (date.charAt(0)) {
+          date = date.charAt(1)
+        }
+        this.setData({
+          deadline: `${month}月${date}日`
         })
       }, (res) => {
         util.warn(res)
