@@ -1,13 +1,26 @@
-<!--index.wxml-->
 <view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+  <view class='head'>
+    <image src='../../images/home-head-bg.png' class="head-bg" mode="widthFix"></image>
+    <text class='head-text'>鞋服专送080901期</text>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+  <view class='head-ad-container'>
+    <text class='head-title-first'>1.5-5kg</text>
+    <text class="head-title-second">每日最低需要寄<text class='color-yellow'>20</text>件</text>
+    <view class='head-right-position'>
+      <image src='../../images/head-right-bg.png' class="head-right-bg" mode="widthFix"></image>
+      <view class='head-right-text-position'>
+        <view>低至￥<text class="head-right-price">6</text></view>
+        <view>1.5kg</view>
+      </view>
+    </view>
+      <image src='../../images/head-ad.jpg' class="ad-bg" mode="widthFix"></image> 
+  </view>
+  <view style='display:flex;margin:8px;align-items:center;'>
+    <view style='width:60%;'>
+      <progress percent="60" stroke-width='20' color='#ff6532'show-info />
+    </view>
+    <view style='width:40%;font-size:14px;margin-left:60rpx;'>
+      还差<text class='color-yellow'>8</text>人即可成团
+    </view>
   </view>
 </view>
