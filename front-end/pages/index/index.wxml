@@ -61,9 +61,9 @@
     <view style='width:20%;background:#fff;height:42px;' class='flex-center'>
       <image src='../../images/img-share.png' style='width:20px;' mode="widthFix"></image>
     </view>
-  </view> 
+  </view>
   <view class="drawer-screen"></view>
-  <view class='drawer-box'> 
+  <view class='drawer-box'>
     <image src='../../images/group-success.png' style='width:64px;' mode="widthFix"></image>
     <view style='font-size:16px;font-weight:600;margin:10px 0;'>报名成功!</view>
     <view style='font-size:14px;color:#888;text-align:left;margin:0 15px;'>转发给更多朋友或生成图片分享至朋友圈，即可加快集货进度~</view>
@@ -75,15 +75,10 @@
       <text>发送微信好友</text>
       <image src='../../images/img-friend.png' style='width:18px;margin-left:8px;' mode="widthFix"></image>
     </view>
-  </view> 
+  </view>
 
   <view class='drawer-close' style='z-index:9999;'>
     <image src='../../images/close.png' style='width:48px;' mode="widthFix"></image>
   </view>
-   
-</view>
-<<<<<<< HEAD
-=======
- 
 
->>>>>>> e87e3fab6cb7138f89685a712d1e31af2f708bb4
+</view>
