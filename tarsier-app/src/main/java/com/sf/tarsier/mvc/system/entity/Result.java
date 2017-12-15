@@ -5,11 +5,6 @@ package com.sf.tarsier.mvc.system.entity;
  * @param <T>
  */
 public class Result<T> {
-
-	public Result(boolean success)
-	{
-		this.success = success;
-	}
 	
 	private boolean success = false;
 	
@@ -20,6 +15,10 @@ public class Result<T> {
 	private String date;
 	
 	private T obj;
+
+	public Result(boolean success){
+		this.success = success;
+	}
 
 	public boolean isSuccess() {
 		return success;
