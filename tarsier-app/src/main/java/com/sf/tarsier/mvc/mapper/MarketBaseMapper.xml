@@ -35,7 +35,7 @@
 	
 	<select id="selectMarketUsersByMktId" parameterType="String"
 		resultType="map">
-		SELECT DISTINCT user_name as userName, image_url as imageUrl FROM pro_market_users WHERE mkt_id = #{mktId,jdbcType=VARCHAR}
+		SELECT user_name as userName, image_url as imageUrl FROM pro_market_users WHERE mkt_id = #{mktId,jdbcType=VARCHAR}
 	</select>
 
 	<!-- 生成UUID -->
