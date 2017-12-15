@@ -58,6 +58,9 @@ public class MarketPropService extends BaseService {
 			resultMap.put("use_require", useRequireTmp);
 	        
 	        mktNameShow = mktNameShow.replace("#val#", mktNameNum);
+	        //生成下期期团名称编号
+	        getBaseDAO().selectList("MarketPropMapper.updatePropNum", null);
+	        
 			logger.info("生成的拼团名称：" + mktNameShow);
 			resultMap.put("mkt_name_show", mktNameShow);
 			

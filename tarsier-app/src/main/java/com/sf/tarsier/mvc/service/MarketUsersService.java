@@ -49,7 +49,7 @@ public class MarketUsersService extends BaseService {
 					//旧团人数已满，自动创建新团，并加入新团
 					String uuid = marketBaseService.createNewMarket();
 					users.setMktId(uuid);
-					returnMsg = "集货旧团已过期，自动拼入新团且操作成功！";
+					returnMsg = "集货旧团已满员，自动拼入新团且操作成功！";
 				}
 				else if(check.get("leave_count") == 1)
 				{
