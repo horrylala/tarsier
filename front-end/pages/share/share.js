@@ -6,9 +6,8 @@ Page({
   },
   saveQRCode: function () {
     wx.saveImageToPhotosAlbum({
-      filePath: '',
+      filePath: `http://10.2.4.33/codeImg/${this.data.QRImageUrl}`,
       success(res) {
-
       }
     })
   },
@@ -17,34 +16,12 @@ Page({
       'path': 'pages/index?mktId=1', 'width': 430
     }
     cargoService.getQRCode(params, (res) => {
-      const base64 = wx.arrayBufferToBase64(res.data.obj);
       this.setData({
-        QRImageUrl: `data:image/png;base64,${base64}`
+        QRImageUrl: res.data.obj
       })
       util.log(res.data.obj)
     }, (res) => {
       util.log(res)
     })
-  },
-  onReady: function () {
-
-  },
-  onShow: function () {
-
-  },
-  onHide: function () {
-
-  },
-  onUnload: function () {
-
-  },
-  onPullDownRefresh: function () {
-
-  },
-  onReachBottom: function () {
-
-  },
-  onShareAppMessage: function () {
-
   }
 })

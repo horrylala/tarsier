@@ -11,7 +11,7 @@
   </view>
   <view style='text-align:center;width:100%;'>
     <view style='width:100%;'>
-      <image mode="widthFix" src="../../images/qrcode.jpg" style='margin-top:20px;width:180px;'></image>
+      <image mode="widthFix" src="http://10.2.4.33/codeImg/{{QRImageUrl}}" style='margin-top:20px;width:180px;'></image>
     </view>
     <view class="share-desc" style='margin:20px 20%;'>扫一扫或长按小程序识别码（二维码）即可直达集货页面</view>
     <button type="primary" bindtap="saveQRCode" style='background:#ff6532;width:240px;'>保存分享小程序码</button>
