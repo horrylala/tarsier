@@ -19,12 +19,13 @@
 }
 
 
-.citypickers{
+.citypicker{
   position: fixed;
   height: 100%;
   width: 100%;
   min-height: 100%;
-  background-color: #ff0;
+  background-color: #eee;
+  z-index:99999;
 }
 
 

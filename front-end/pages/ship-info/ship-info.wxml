@@ -36,6 +36,7 @@
   </view>
 </view>
 
+<view class="drawer-screen" wx:if="{{condition}}"></view>
 <view wx:if="{{condition}}" class="citypicker">
   <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange" class="citybody">
     <view class="cityheader">
