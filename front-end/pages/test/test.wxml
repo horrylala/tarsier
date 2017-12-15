@@ -1,4 +1,0 @@
-<!--pages/test/test.wxml-->
-<view style="padding-top:30px;" wx:for="{{array}}" wx:key="unique">
-  {{index}}: {{item}}
-</view>

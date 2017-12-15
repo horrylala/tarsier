@@ -8,3 +8,25 @@ button {
   background-color: #ff6532;
   color: white;
 }
+.footer{
+  position:absolute;
+  bottom: 0;
+  left:0;
+  height: 44px;
+  width:100%;
+  background:#ff6532;
+  color:#fff;
+}
+.footer-content{
+  font-size:14px;
+}
+.flex-center{
+  display:flex;align-items:center;justify-content:center;
+
+}
+.flex-center{
+  display:flex;align-items:center;justify-content:center;
+}
+.color-yellow{
+   color: #ff6532;
+ }

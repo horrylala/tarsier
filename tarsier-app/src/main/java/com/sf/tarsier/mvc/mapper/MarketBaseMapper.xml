@@ -5,10 +5,19 @@
 
 	<select id="selectMarketBaseInfo" parameterType="com.sf.tarsier.mvc.entity.QueryMarketBaseRequest"
 		resultMap="marketBaseResultMap">
-		select mkt_id, mkt_name_show, daily_min_packages, weight_min, weight_max, base_price, base_weight, group_limit, group_duration, use_require, create_time from pro_market_base where 1=1
-		<if test="mktId !=null and mktId !=''">
-			and mkt_id=#{mktId,jdbcType=VARCHAR}
-		</if>
+		select mkt_id, mkt_name_show, daily_min_packages, weight_min, weight_max, base_price, base_weight, group_limit, group_duration, use_require, create_time from pro_market_base t2 where 1=1
+		<choose>
+            <when test="mktId !=null and mktId !=''">
+               and mkt_id=#{mktId,jdbcType=VARCHAR} 
+            </when>
+            <otherwise>
+				and t2.create_time + INTERVAL t2.group_duration MINUTE - NOW() > 0 
+				AND t2.group_limit > 
+				(SELECT COUNT(1) FROM pro_market_users t1 WHERE t1.mkt_id = t2.mkt_id) 
+				ORDER BY t2.create_time ASC
+				LIMIT 1
+            </otherwise>
+        </choose>
 	</select>
 	<resultMap type="com.sf.tarsier.mvc.entity.MarketBase" id="marketBaseResultMap">
 		<id property="mktId" column="mkt_id" />
@@ -29,4 +38,37 @@
 		SELECT DISTINCT user_name as userName, image_url as imageUrl FROM pro_market_users WHERE mkt_id = #{mktId,jdbcType=VARCHAR}
 	</select>
 
+	<!-- 生成UUID -->
+	<select id="selectMarketBaseUUID" resultType="string">
+      select UUID() as 'currUuid' from dual
+    </select>
+	
+	<!-- 生成新团 -->   
+	<insert id="insertMarketBase" parameterType="map">
+		INSERT INTO `pro_market_base` (
+				`mkt_id`,
+				`mkt_name_show`,
+				`daily_min_packages`,
+				`weight_min`,
+				`weight_max`,
+				`base_price`,
+				`base_weight`,
+				`group_limit`,
+				`group_duration`,
+				`use_require`,
+				`create_time`
+			) VALUES
+				(   #{curr_uuid,jdbcType=VARCHAR},
+					#{mkt_name_show,jdbcType=VARCHAR},
+					#{daily_min_packages,jdbcType=VARCHAR},
+					#{weight_min,jdbcType=VARCHAR},
+					#{weight_max,jdbcType=VARCHAR},
+					#{base_price,jdbcType=VARCHAR},
+					#{base_weight,jdbcType=VARCHAR},
+					#{group_limit,jdbcType=VARCHAR},
+					#{group_duration,jdbcType=VARCHAR},
+					#{use_require,jdbcType=VARCHAR},
+					now()
+				)
+	</insert>
 </mapper>   

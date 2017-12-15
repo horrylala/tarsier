@@ -1,11 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-        "pages/ship-info/ship-info",
-        "pages/share/share",
-        "pages/address-picker/address-picker",
-
-    "pages/test/test",
+    "pages/share/share",
+    "pages/ship-info/ship-info",
     "pages/logs/logs"
   ],
   "window": {

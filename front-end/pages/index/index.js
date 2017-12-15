@@ -8,6 +8,7 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    deadline: '',
     mktData: {
      userCount: 0,
      freeCount: 0,
@@ -69,13 +70,20 @@ Page({
     if (this.userInfo !== null || this.userInfo !== undefined) {
       cargoService.getCargoInfo({mktId: 'c40dfd11-e140-11e7-b870-000000005aad'}, (res) => {
         util.log(res.data.obj)
+        let response = res.data.obj
         this.setData({
-          mktData: res.data.obj
+          mktData: res.data.obj,
+          deadline: response.deadline
         })
       }, (res) => {
         util.warn(res)
       })
     }
+  },
+  onAttend: function () {
+    wx.navigateTo({
+      url: `../ship-info/ship-info?mktId=${this.data.mktData.marketBase.mktId}`,
+    })
   },
   getUserInfo: function(e) {
     console.log(e)
