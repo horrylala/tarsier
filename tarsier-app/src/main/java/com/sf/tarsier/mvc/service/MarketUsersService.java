@@ -23,6 +23,9 @@ public class MarketUsersService extends BaseService {
 	
 	private static final String LEAVE_COUNT = "leave_count"; 
 	
+	@Autowired
+	private MarketBaseAsyncTask marketBaseAsyncTask;
+	
 	/**
 	 * <b>功能：保存参加集货拼团，参团信息
 	 */
@@ -81,7 +84,7 @@ public class MarketUsersService extends BaseService {
 			else if(check.get(LEAVE_COUNT) == 1)
 			{
 				//旧团人数将满，自动创建新团
-				marketBaseService.createNewMarket();
+				marketBaseAsyncTask.execute();
 			}
 		}
 		return returnMsg;
