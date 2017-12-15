@@ -67,7 +67,7 @@ public class MarketPropService extends BaseService {
 			return resultMap;
 		} catch (Exception e) {
 			logger.error("集货拼团，参团操作失败", e);
-			return new HashMap<String,String>();
+			return new HashMap<>();
 		}
 	}
 	

@@ -20,6 +20,8 @@ public class MarketUsersService extends BaseService {
 	@Autowired
 	private MarketBaseService marketBaseService;
 	
+	private static final String LEAVE_COUNT = "leave_count"; 
+	
 	/**
 	 * <b>功能：保存参加集货拼团，参团信息
 	 */
@@ -28,8 +30,7 @@ public class MarketUsersService extends BaseService {
 			String returnMsg = "参团成功！";
 			//检查当前要参团的时间周期和参团人员
 			@SuppressWarnings("unchecked")
-			Map<String,Long> selectOne = (Map<String,Long>)getBaseDAO().selectOne("MarketUsersMapper.selectMarketUsersLimit", users.getMktId());
-			Map<String,Long> check = selectOne;
+			Map<String,Long> check = (Map<String,Long>)getBaseDAO().selectOne("MarketUsersMapper.selectMarketUsersLimit", users.getMktId());
 			if(null==check || check.isEmpty())
 			{
 				//参团数据不存在
@@ -42,16 +43,16 @@ public class MarketUsersService extends BaseService {
 				users.setMktId(uuid);
 				returnMsg = "集货旧团已过期，自动拼入新团且操作成功！";
 			}
-			else if(check.containsKey("leave_count"))
+			else if(check.containsKey(LEAVE_COUNT))
 			{
-				if(check.get("leave_count") <= 0)
+				if(check.get(LEAVE_COUNT) <= 0)
 				{
 					//旧团人数已满，自动创建新团，并加入新团
 					String uuid = marketBaseService.createNewMarket();
 					users.setMktId(uuid);
 					returnMsg = "集货旧团已满员，自动拼入新团且操作成功！";
 				}
-				else if(check.get("leave_count") == 1)
+				else if(check.get(LEAVE_COUNT) == 1)
 				{
 					//旧团人数将满，自动创建新团
 					marketBaseService.createNewMarket();
