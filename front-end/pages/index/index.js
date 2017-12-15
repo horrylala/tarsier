@@ -89,6 +89,11 @@ Page({
       url: `../ship-info/ship-info?mktId=${this.data.mktData.marketBase.mktId}`,
     })
   },
+  onShare:function(){
+    wx.navigateTo({
+      url: `../share/share`,
+    })
+  },
   getUserInfo: function(e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
