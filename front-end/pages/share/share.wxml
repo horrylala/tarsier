@@ -1,0 +1,8 @@
+<view>
+  <view>
+    <image mode="aspectFit" src="../../images/qrcode.jpg"></image>
+    <label class="share_desc">扫一扫或长按小程序识别码（二维码）即可直达集货页面</label>
+    <button type="primary" bindtap="saveQRCode">保存分享小程序码</button>
+    <label class="save_desc">长按识别二维码查看详情</label>
+  </view>
+</view>

@@ -1,0 +1,11 @@
+.share_desc {
+  margin: 60rpx;
+  font: 12rpx #eee;
+  text-align: left;
+}
+
+.save_desc {
+  margin: 60rpx;
+  font: 12rpx #eee;
+  text-align: left;
+}
