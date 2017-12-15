@@ -61,7 +61,8 @@ Page({
     }
     cargoService.saveCargoAttend(params, (res) => {
       util.log(res.data.obj)
-      if (res.data.success === 'true') {
+      if (res.data.success) {
+        wx.navigateBack({delta: 2})
         wx.navigateTo({
           url: `../share/share?mktId=${this.data.mktId}`,
         })
