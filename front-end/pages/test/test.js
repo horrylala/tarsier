@@ -1,11 +1,11 @@
-const request = require('../../request/request.js');
+const cargoService = require('../../services/cargo-service');
 const util =  require('../../utils/util.js');
 Page({
   data: {
     array: {}
   },
   onLoad: function (options) {
-    request.getTest({id: '123', bookName: 'sfwer'}, (res) => {
+    cargoService.getTest({id: '123', bookName: 'sfwer'}, (res) => {
       this.setData({
         array: res.data.obj
       })

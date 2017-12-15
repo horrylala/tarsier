@@ -52,7 +52,7 @@ function formatDate(date) {
 // 手机校验
 function phoneVerify(phone) {
   return /^1[34578]\d{9}$/.test(this.removeAllEmpty(phone))
-},
+}
 
 module.exports = {
   formatTime: formatTime,

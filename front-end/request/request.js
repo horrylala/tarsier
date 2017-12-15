@@ -1,6 +1,4 @@
 const util = require('../utils/util')
-const config = require('../config')
-
 // requestData
 function requestData(url, data, successCallback, errorCallback, completeCallback) {
   wx.request({
@@ -33,9 +31,6 @@ function requestData(url, data, successCallback, errorCallback, completeCallback
   })
 }
 
-function getTest(data, successCallback, errorCallback) {
-  return requestData(`${config.API_BASE}/book/test`, data, successCallback, errorCallback)
-}
 
 // requestXCX (增加GET/POST等请求方法和Content-Type设置)  == jt add
 function requestXCX(url, data, method, contentType, successCallback, errorCallback, completeCallback) {
@@ -261,7 +256,7 @@ function myEnrollList(data, successCallback, errorCallback, completeCallback) {
 
 
 module.exports = {
+  requestData: requestData,
   getVoteData: getVoteData,
-  getCosAuth: getCosAuth,
-  getTest: getTest
+  getCosAuth: getCosAuth
 }
