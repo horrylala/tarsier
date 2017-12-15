@@ -8,30 +8,30 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+
 /**
- * 文件名：HttpServletRequestTrimParamWrapper.java
- * 功能描述：对提交的数据的去掉前后的空格
- * 类名:HttpServletRequestTrimParamWrapper
- * 功能: 去掉提交数据的前后空格，提高用户界面容错度
+ * 类名:HttpServletRequestTrimParamWrapper 功能: 去掉提交数据的前后空格，提高用户界面容错度
  * 如果要管理session，或session实现共享就用HttpSessionWrapper
  */
-public class HttpServletRequestTrimParamWrapper extends
-		HttpServletRequestWrapper {
+public class HttpServletRequestTrimParamWrapper extends HttpServletRequestWrapper {
 
 	public HttpServletRequestTrimParamWrapper(HttpServletRequest request) {
 		super(request);
 	}
-	
+
+	@Override
 	public String getParameter(String name) {
 		return trim(super.getParameter(name));
 	}
-	
+
+	@Override
 	public String[] getParameterValues(String name) {
 		return trim(super.getParameterValues(name));
 	}
 
 	private ParameterMap2 pm2;
-	
+
+	@Override
 	public Map<String, String[]> getParameterMap() {
 		if (pm2 == null) {
 			pm2 = new ParameterMap2(super.getParameterMap());
@@ -41,8 +41,31 @@ public class HttpServletRequestTrimParamWrapper extends
 
 	@SuppressWarnings("serial")
 	private class ParameterMap2 extends HashMap<String, String[]> {
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) {
+				return true;
+			}
+			if (o == null || getClass() != o.getClass()) {
+				return false;
+			}
+			if (!super.equals(o)) {
+				return false;
+			}
 
-		private Set<Map.Entry<String, String[]>> entrySet;
+			ParameterMap2 that = (ParameterMap2) o;
+
+			return entryHashSet != null ? entryHashSet.equals(that.entryHashSet) : that.entryHashSet == null;
+		}
+
+		@Override
+		public int hashCode() {
+			int result = super.hashCode();
+			result = 31 * result + (entryHashSet != null ? entryHashSet.hashCode() : 0);
+			return result;
+		}
+
+		private transient Set<Map.Entry<String, String[]>> entryHashSet;
 
 		/**
 		 * 若要构造此类对象，则需要传入一个map参数，该map对应的客户端请求的参数(K,V)。
@@ -53,19 +76,19 @@ public class HttpServletRequestTrimParamWrapper extends
 		public ParameterMap2(Map<String, String[]> map) {
 			super(map);
 		}
-		
+
+		@Override
 		public Set<java.util.Map.Entry<String, String[]>> entrySet() {
-			if (entrySet == null) {
-				entrySet = new HashSet<Map.Entry<String, String[]>>();
+			if (entryHashSet == null) {
+				entryHashSet = new HashSet<>();
 				Set<Map.Entry<String, String[]>> temSet = super.entrySet();
-				for (Iterator<Map.Entry<String, String[]>> iterator = temSet
-						.iterator(); iterator.hasNext();) {
+				for (Iterator<Map.Entry<String, String[]>> iterator = temSet.iterator(); iterator.hasNext();) {
 					Map.Entry<String, String[]> me = iterator.next();
 					Entry2 entry = new Entry2(me);
-					entrySet.add(entry);
+					entryHashSet.add(entry);
 				}
 			}
-			return entrySet;
+			return entryHashSet;
 		}
 
 		// 若直接从map使用key取得
@@ -76,7 +99,7 @@ public class HttpServletRequestTrimParamWrapper extends
 			if (value != null) {
 				return trim(value);
 			}
-			return null;
+			return new String[]{};
 		}
 	}
 
@@ -87,24 +110,25 @@ public class HttpServletRequestTrimParamWrapper extends
 
 		public Entry2(Map.Entry<String, String[]> me) {
 			if (me == null) {
-				throw new IllegalArgumentException(
-						"Map.Entiry argument not null.");
+				throw new IllegalArgumentException("Map.Entiry argument not null.");
 			}
 			this.me = me;
 		}
 
+		@Override
 		public String getKey() {
 			return me.getKey();
 		}
 
+		@Override
 		public String[] getValue() {
 			if (isTrim) {
-				return HttpServletRequestTrimParamWrapper.this.trim(me
-						.getValue());
+				return HttpServletRequestTrimParamWrapper.this.trim(me.getValue());
 			}
 			return me.getValue();
 		}
 
+		@Override
 		public String[] setValue(String[] value) {
 			return me.setValue(value);
 		}
@@ -155,4 +179,6 @@ public class HttpServletRequestTrimParamWrapper extends
 		}
 		return values;
 	}
+
+
 }

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class BaseService<T> {
+public class BaseService {
 	
 	@Autowired
 	private BaseDAO baseDAO;
@@ -21,11 +21,11 @@ public class BaseService<T> {
 		return getBaseDAO().selectOne(key, params);
 	}
 	
-	public List<?> selectList(String key) {
+	public <T> List<T> selectList(String key) {
 		return selectList(key, null);
 	}
 
-	public List<?> selectList(String key, Object params) {
+	public <T> List<T> selectList(String key, Object params) {
 		return getBaseDAO().selectList(key, params);
 	}
 }

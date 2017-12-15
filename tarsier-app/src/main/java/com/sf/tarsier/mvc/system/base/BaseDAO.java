@@ -33,7 +33,7 @@ public class BaseDAO extends SqlSessionDaoSupport implements Serializable{
 		return selectList(key,null);
 	}
 
-	public List<?> selectList(String key, Object params) {
+	public <T> List<T> selectList(String key, Object params) {
 		return getSqlSession().selectList(key, params);
 	}
 

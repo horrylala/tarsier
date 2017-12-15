@@ -75,12 +75,6 @@
 		<property name="mapperLocations" value="classpath:com/sf/tarsier/mvc/mapper/*Mapper.xml" />
 	</bean>
 	
-	<!--手动刷新mapper，不需要重启服务-->
-	<bean id="RefreshMybatisMapper" class="com.sf.tarsier.mvc.system.mapper.RefreshMybatisMapper">
-		<property name="mySessionFactory" ref="mySessionFactory" />
-		<property name="mapperLocations" value="classpath:com/sf/tarsier/mvc/mapper/*Mapper.xml" />
-	</bean>
-	
 	<!-- 定义事务管理器（声明式的事务） -->
 	<bean id="myTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
