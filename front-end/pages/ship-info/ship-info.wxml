@@ -1,0 +1,32 @@
+<view style="height:100%;background:#F8F8F8">
+  <scroll-view scroll-y style="height:100%">
+  <view class="ship-address">
+    <view>
+      <image src="../../images/address.png" mode='aspect'></image>
+      <label>寄件地址</label>
+    </view>
+    <view>
+      <text>所在地区</text>
+      <picker-view>
+
+      </picker-view>
+      <input class="" placeholder="请输入详细地址" bindblur="address"></input>
+    </view>
+  </view>
+  <view class="ship-person">
+    <text>寄件人</text>
+    <view>
+      <input Type="text" placeholder="请填写寄件人姓名" bindblur="senderName"></input>
+      <input Type="text" placeholder="请填写寄件人电话" bindblur="senderPhone"></input>
+    </view>
+  </view>
+  <view class="ship-count">
+    <text>预计每日件量</text>
+    <view>
+      <input Type="text" placeholder="请填写寄件数量" bindblur="shipCount"></input>
+      <input Type="text" placeholder="请填写单件平均重量" bindblur="averWeight"></input>
+    </view>
+  </view>
+  <button bindtap="attendShip" hover-class="button-hover">报名集货</button>
+  </scroll-view>
+</view>
