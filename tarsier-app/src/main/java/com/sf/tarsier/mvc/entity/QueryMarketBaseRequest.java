@@ -1,6 +1,7 @@
 package com.sf.tarsier.mvc.entity;
 
 
+
 public class QueryMarketBaseRequest {
 	/**
 	 * 专业市场ID
@@ -14,4 +15,5 @@ public class QueryMarketBaseRequest {
 	public void setMktId(String mktId) {
 		this.mktId = mktId;
 	}
+
 }

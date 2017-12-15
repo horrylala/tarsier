@@ -3,7 +3,7 @@
 
 <mapper namespace="MarketBaseMapper">
 
-	<select id="selectMarketBaseInfo" parameterType="string"
+	<select id="selectMarketBaseInfo" parameterType="String"
 		resultMap="marketBaseResultMap">
 		select mkt_id, mkt_name_show, daily_min_packages, weight_min, weight_max, base_price, base_weight, group_limit, group_duration, use_require, create_time from pro_market_base where 1=1
 		<if test="mktId !=null and mktId !=''">
@@ -22,6 +22,15 @@
 		<result property="groupDuration" column="group_duration" />
 		<result property="useRequire" column="use_require" />
 		<result property="createTime" column="create_time" />
+	</resultMap>
+	
+	<select id="selectMarketUsersByMktId" parameterType="string"
+		resultMap="marketUsersResultMap">
+		SELECT DISTINCT user_name, image_url FROM pro_market_users WHERE mkt_id = #{mktId,jdbcType=VARCHAR}
+	</select>
+	<resultMap type="com.sf.tarsier.mvc.entity.MarketUsers" id="marketUsersResultMap">
+		<result property="userName" column="user_name" />
+		<result property="imageUrl" column="image_url" />
 	</resultMap>
 
 </mapper>   
