@@ -1,7 +1,10 @@
 package com.sf.tarsier.mvc.system.util;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -34,8 +37,8 @@ public final class HttpUtils {
 	 *            类型
 	 * @return
 	 */
-	public static String post(String url, Map<String, Object> params, String contentType) {
-		return post(url, JSONObject.toJSONString(params), contentType);
+	public static String post(String url, Map<String, Object> params, String contentType,File file) {
+		return post(url, JSONObject.toJSONString(params), contentType,file);
 	}
 
 	/**
@@ -48,7 +51,9 @@ public final class HttpUtils {
 	 * @return
 	 */
 	public static String post(String url, Map<String, Object> params) {
-		return post(url, params, "application/json;charset=UTF-8");
+		File f=new File(params.get("filePath").toString());
+		params.remove("filePath");
+		return post(url, params, "application/json;charset=UTF-8",f);
 	}
 
 	public static String get(String url, Map<String, Object> params) {
@@ -69,8 +74,7 @@ public final class HttpUtils {
 	 * @return
 	 * @throws IOException
 	 */
-	public static String post(String url, String params, String contentType) {
-		StringBuilder result = new StringBuilder();
+	public static String post(String url, String params, String contentType,File file) {
 		HttpURLConnection con = null;
 		try {
 			URL u = new URL(url);
@@ -88,7 +92,7 @@ public final class HttpUtils {
 			conDisConnect(con);
 			throw new BusinessException("postConnection请求失败：", e);
 		}
-		if (!StringUtils.isEmpty(params) && !"null".equals(params)) {
+		if (!StringUtils.isEmpty(params)) {
 			try (OutputStream out = con.getOutputStream();) {
 				out.write(params.getBytes(UTF_8));
 				out.flush();
@@ -98,14 +102,14 @@ public final class HttpUtils {
 				throw new BusinessException("postOutputStream请求失败：", e);
 			}
 		}
-		try (BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream(), UTF_8));) {
-			String line = null;
-			while (null != (line = reader.readLine())) {
-				result.append(line);
-			}
-			String ret = result.toString();
-			logger.info("key=[" + Thread.currentThread().getId() + "$]" + ret);
-			return ret;
+		try (InputStream is=con.getInputStream();OutputStream os=new FileOutputStream(file);){
+			byte[] bytes = new byte[1024];
+            int length = 0;
+            while ((length = is.read(bytes)) != -1) {
+                os.write(bytes, 0, length);
+            }
+            os.flush();
+            return file.getPath();
 		} catch (Exception e) {
 			logger.error("post请求失败：" + url + "," + params, e);
 			throw new BusinessException("post请求失败：", e);
@@ -174,8 +178,9 @@ public final class HttpUtils {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static String post(String url, String paramsJson) {
+	public Object post(String url, String paramsJson) {
 		Map<String, Object> map = JSON.parseObject(paramsJson, Map.class);
 		return post(url, map);
 	}
+	
 }

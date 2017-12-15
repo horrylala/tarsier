@@ -2,8 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/share/share",
-    "pages/ship-info/ship-info",
-    "pages/logs/logs"
+    "pages/ship-info/ship-info"
   ],
   "window": {
     "backgroundTextStyle": "light",

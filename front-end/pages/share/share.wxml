@@ -1,8 +1,28 @@
 <view>
+<<<<<<< HEAD
   <view>
     <image mode="aspectFit" src="{{QRImageUrl}}"></image>
     <label class="share_desc">扫一扫或长按小程序识别码（二维码）即可直达集货页面</label>
     <button type="primary" bindtap="saveQRCode">保存分享小程序码</button>
     <label class="save_desc">长按识别二维码查看详情</label>
+=======
+   <view class='head'>
+    <image src='../../images/home-head-bg.png' class="head-bg" mode="widthFix"></image>
+    <text class='head-text'>鞋服专送080901期</text>
+    <view style='font-size:14px;color:#000;margin-top:-10px;'>
+      全国流向
+      <text class='color-yellow'>1.5-5kg</text>
+      <text style='margin:0 10px;'>|</text>
+      <text>每日承诺寄件量最低<text class='color-yellow'>20</text>件</text>
+    </view>
+  </view>
+  <view style='text-align:center;width:100%;'>
+    <view style='width:100%;'>
+      <image mode="widthFix" src="../../images/qrcode.jpg" style='margin-top:20px;width:180px;'></image>
+    </view>
+    <view class="share-desc" style='margin:20px 20%;'>扫一扫或长按小程序识别码（二维码）即可直达集货页面</view>
+    <button type="primary" bindtap="saveQRCode" style='background:#ff6532;width:240px;'>保存分享小程序码</button>
+    <view class="share-desc" style='margin:20px 0;'>长按识别二维码查看详情</view>
+>>>>>>> e87e3fab6cb7138f89685a712d1e31af2f708bb4
   </view>
 </view>

@@ -66,28 +66,6 @@ public class ServletContextFilter implements Filter {
 				hreq = new HttpServletRequestTrimParamWrapper(hreq);
 			}
 			
-			/*//路径权限判断
-			//如果用户session为空，且请求不在透传URLS中，就直接退出
-			if("openid" == null && !existsUrl(reqUrl,FilterUrl.getNotNeedAuthUrl()))
-			{
-				sb.append("无效请求未鉴权，");
-				PrintWriter pw = hres.getWriter();
-				pw.write(JSON.toJSONString(ResultUtil.error("请先完成鉴权","NOT_AUTH")));
-				pw.close();
-				return;
-			}
-			if("session" == null && !existsUrl(reqUrl,FilterUrl.getNotNeedLoginUrl()))
-			{
-				sb.append("无效请求未登陆，");
-				PrintWriter pw = hres.getWriter();
-				pw.write(JSON.toJSONString(ResultUtil.error("请先登陆","NOT_LOGIN")));
-				pw.close();
-				return;
-			}*/
-			//还可以对特定菜单加权限，只有指定IP或指定人员才可访问
-			//更新redis-session重新设置为30分钟
-			//UserSession.updateSessionTm(req);
-			
 			//调用后台处理
 			chain.doFilter(hreq, response);
 		} finally {
@@ -102,22 +80,4 @@ public class ServletContextFilter implements Filter {
 		logger.debug("销毁对象");
 	}
 	
-	/**
-	 * 检查当前请求是否在过滤url中
-	 * @param url
-	 * @param urls
-	 * @return
-	 *//*
-	private boolean existsUrl(String url, List<String> urls){
-		for (String tmp : urls) {
-			if(url.equals(tmp))
-			{
-				return true;
-			}
-			if(tmp.endsWith("*") && url.startsWith(tmp.substring(0, tmp.length() - 1))) {
-				return true;
-			}
-		}
-		return false;
-	}*/
 }

@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequestWrapper;
  */
 public class HttpServletRequestTrimParamWrapper extends HttpServletRequestWrapper {
 
+	private ParameterMap2 pm2;
+
 	public HttpServletRequestTrimParamWrapper(HttpServletRequest request) {
 		super(request);
 	}
@@ -29,8 +31,6 @@ public class HttpServletRequestTrimParamWrapper extends HttpServletRequestWrappe
 		return trim(super.getParameterValues(name));
 	}
 
-	private ParameterMap2 pm2;
-
 	@Override
 	public Map<String, String[]> getParameterMap() {
 		if (pm2 == null) {
@@ -41,6 +41,19 @@ public class HttpServletRequestTrimParamWrapper extends HttpServletRequestWrappe
 
 	@SuppressWarnings("serial")
 	private class ParameterMap2 extends HashMap<String, String[]> {
+
+		private transient Set<Map.Entry<String, String[]>> entryHashSet;
+
+		/**
+		 * 若要构造此类对象，则需要传入一个map参数，该map对应的客户端请求的参数(K,V)。
+		 * 
+		 * @param map
+		 *            映射客户端参数。
+		 */
+		public ParameterMap2(Map<String, String[]> map) {
+			super(map);
+		}
+		
 		@Override
 		public boolean equals(Object o) {
 			if (this == o) {
@@ -63,18 +76,6 @@ public class HttpServletRequestTrimParamWrapper extends HttpServletRequestWrappe
 			int result = super.hashCode();
 			result = 31 * result + (entryHashSet != null ? entryHashSet.hashCode() : 0);
 			return result;
-		}
-
-		private transient Set<Map.Entry<String, String[]>> entryHashSet;
-
-		/**
-		 * 若要构造此类对象，则需要传入一个map参数，该map对应的客户端请求的参数(K,V)。
-		 * 
-		 * @param map
-		 *            映射客户端参数。
-		 */
-		public ParameterMap2(Map<String, String[]> map) {
-			super(map);
 		}
 
 		@Override
