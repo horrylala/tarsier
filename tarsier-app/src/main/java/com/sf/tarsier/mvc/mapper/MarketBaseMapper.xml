@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="MarketBaseMapper">
+
+	<select id="selectMarketBaseInfo" parameterType="string"
+		resultMap="marketBaseResultMap">
+		select mkt_id, mkt_name_show, daily_min_packages, weight_min, weight_max, base_price, base_weight, group_limit, group_duration, use_require, create_time from pro_market_base where 1=1
+		<if test="mktId !=null and mktId !=''">
+			and mkt_id=#{mktId,jdbcType=VARCHAR}
+		</if>
+	</select>
+	<resultMap type="com.sf.tarsier.mvc.entity.MarketBase" id="marketBaseResultMap">
+		<id property="mktId" column="mkt_id" />
+		<result property="mktNameShow" column="mkt_name_show" />
+		<result property="dailyMinPackages" column="daily_min_packages" />
+		<result property="weightMin" column="weight_min" />
+		<result property="weightMax" column="weight_max" />
+		<result property="basePrice" column="base_price" />
+		<result property="baseWeight" column="base_weight" />
+		<result property="groupLimit" column="group_limit" />
+		<result property="groupDuration" column="group_duration" />
+		<result property="useRequire" column="use_require" />
+		<result property="createTime" column="create_time" />
+	</resultMap>
+
+</mapper>   
