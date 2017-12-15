@@ -1,5 +1,6 @@
 package com.sf.tarsier.mvc.service;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -41,7 +42,11 @@ public class MarketUsersService extends BaseService {
 			
 			//参团人员保存
 			getBaseDAO().update("MarketUsersMapper.saveMarketUsers", users);
-			return ResultUtil.success(returnMsg);
+			
+			Map<String,String> resultMap = new HashMap<>();
+			resultMap.put("returnMsg", returnMsg);
+			resultMap.put("mktId", users.getMktId());
+			return ResultUtil.success(resultMap);
 		} catch (Exception e) {
 			logger.error("集货拼团，参团操作失败", e);
 			return ResultUtil.error("集货拼团参团操作失败，请重试！");
