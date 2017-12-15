@@ -2,19 +2,19 @@ const hasConsole = typeof console !== 'undefined'
 
 function log(msg) {
   if (hasConsole) {
-    console.log(`[wx log]: ${msg}`)
+    console.log('[wx log]:', msg)
   }
 }
 
 function warn(msg) {
   if (hasConsole) {
-    console.error(`[wx warn]: ${msg}`)
+    console.error('[wx warn]:', msg)
   }
 }
 
 function tip(msg) {
   if (hasConsole) {
-    console.error(`[wx warn]: ${msg}`)
+    console.error('[wx warn]:', msg)
   }
 }
 
