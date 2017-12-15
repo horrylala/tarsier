@@ -92,7 +92,7 @@ public final class HttpUtils {
 			conDisConnect(con);
 			throw new BusinessException("postConnection请求失败：", e);
 		}
-		if (!StringUtils.isEmpty(params) && !"null".equals(params)) {
+		if (!StringUtils.isEmpty(params)) {
 			try (OutputStream out = con.getOutputStream();) {
 				out.write(params.getBytes(UTF_8));
 				out.flush();
@@ -183,7 +183,4 @@ public final class HttpUtils {
 		return post(url, map);
 	}
 	
-	public static void main(String[] args){
-		System.out.println(System.getProperty("user.dir"));
-	}
 }
