@@ -37,8 +37,8 @@ public final class HttpUtils {
 	 *            类型
 	 * @return
 	 */
-	public static Object post(String url, Map<String, Object> params, String contentType) {
-		return post(url, JSONObject.toJSONString(params), contentType);
+	public static String post(String url, Map<String, Object> params, String contentType,File file) {
+		return post(url, JSONObject.toJSONString(params), contentType,file);
 	}
 
 	/**
@@ -50,8 +50,10 @@ public final class HttpUtils {
 	 *            默认 contentType:application/json;charset=UTF-8
 	 * @return
 	 */
-	public static Object post(String url, Map<String, Object> params) {
-		return post(url, params, "application/json;charset=UTF-8");
+	public static String post(String url, Map<String, Object> params) {
+		File f=new File(params.get("filePath").toString());
+		params.remove("filePath");
+		return post(url, params, "application/json;charset=UTF-8",f);
 	}
 
 	public static String get(String url, Map<String, Object> params) {
@@ -72,8 +74,7 @@ public final class HttpUtils {
 	 * @return
 	 * @throws IOException
 	 */
-	public static Object post(String url, String params, String contentType) {
-		StringBuilder result = new StringBuilder();
+	public static String post(String url, String params, String contentType,File file) {
 		HttpURLConnection con = null;
 		try {
 			URL u = new URL(url);
@@ -101,21 +102,14 @@ public final class HttpUtils {
 				throw new BusinessException("postOutputStream请求失败：", e);
 			}
 		}
-		File f=new File("E:\\11.png");
-		try (InputStream is=con.getInputStream();OutputStream os=new FileOutputStream(f);){
-//			byte[] data= new byte[is.available()];
-//			is.read(data);
-//			return data;
+		try (InputStream is=con.getInputStream();OutputStream os=new FileOutputStream(file);){
 			byte[] bytes = new byte[1024];
             int length = 0;
             while ((length = is.read(bytes)) != -1) {
                 os.write(bytes, 0, length);
             }
             os.flush();
-            return f.getAbsolutePath();
-//			String ret=Base64.byteArrayToBase64(data);
-//			logger.info("key=[" + Thread.currentThread().getId() + "$]" + ret);
-//			return ret;
+            return file.getPath();
 		} catch (Exception e) {
 			logger.error("post请求失败：" + url + "," + params, e);
 			throw new BusinessException("post请求失败：", e);
@@ -187,5 +181,9 @@ public final class HttpUtils {
 	public Object post(String url, String paramsJson) {
 		Map<String, Object> map = JSON.parseObject(paramsJson, Map.class);
 		return post(url, map);
+	}
+	
+	public static void main(String[] args){
+		System.out.println(System.getProperty("user.dir"));
 	}
 }
