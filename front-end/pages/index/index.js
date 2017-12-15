@@ -15,7 +15,7 @@ Page({
      completePercent: 0,
      deadline: '2018-01-06 11:17:11',
      marketBase: {
-      mktId: 'c40dfd11-e140-11e7-b870-000000005aad',
+      mktId: '',
       mktNameShow: 'test',
       dailyMinPackages: null,
       weightMin: null,
@@ -68,7 +68,7 @@ Page({
       })
     }
     if (this.userInfo !== null || this.userInfo !== undefined) {
-      cargoService.getCargoInfo({mktId: 'c40dfd11-e140-11e7-b870-000000005aad'}, (res) => {
+      cargoService.getCargoInfo({mktId: ''}, (res) => {
         util.log(res.data.obj)
         let response = res.data.obj
         this.setData({
@@ -83,6 +83,11 @@ Page({
   onAttend: function () {
     wx.navigateTo({
       url: `../ship-info/ship-info?mktId=${this.data.mktData.marketBase.mktId}`,
+    })
+  },
+  onShare:function(){
+    wx.navigateTo({
+      url: `../share/share`,
     })
   },
   getUserInfo: function(e) {

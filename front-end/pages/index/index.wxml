@@ -47,19 +47,19 @@
     <image src='../../images/img-join.png' style='width:18px;' mode="widthFix"></image>
     <view style='font-size:14px;margin-left:2px;'>最近参与</view>
   </view>
-  <view style='display:flex;align-items:center;font-size:12px;padding:0 10px;height:36px;'>
-    <view wx:for="{{mktData.users}}" wx:key="unique">
-      <image src="{{item.imageUrl}}" style='width:28px;' mode="widthFix"></image>
-    </view>
-    <view style='width:100%;text-align:right;'>已有<text class='color-yellow'>{{mktData.userCount}}</text>人参团</view>
+  <view style='display:flex;align-items:center;font-size:12px;padding:0 10px;'>
+      <view style='width:70%;display:flex;height:36px;'>
+        <image src="{{item.imageUrl}}" style='width:28px;height:28px;' mode="widthFix" wx:for="{{mktData.users}}" wx:key="unique"></image>
+      </view>
+        <view style='width:30%;text-align:right;'>已有<text class='color-yellow'>{{mktData.userCount}}</text>人参团</view>
   </view>
 
   <view class='footer footer-content flex-center'>
     <view style='width:80%;' class='flex-center' bindtap='onAttend'>
-      立即参加
+      {{mktData.completePercent==100 ? '下期继续' : '立即参加'}}
     </view>
     <view style='width:20%;background:#fff;height:42px;' class='flex-center'>
-      <image src='../../images/img-share.png' style='width:20px;' mode="widthFix"></image>
+      <image src='../../images/img-share.png' style='width:20px;' mode="widthFix" bindtap='onShare'></image>
     </view>
   </view>
   <view class="drawer-screen" style='display:none;'></view>
