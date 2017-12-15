@@ -26,7 +26,7 @@
  }
   .ad-bg{
    width:100%;
-   margin-top:-190rpx; 
+   margin-top:-170rpx; 
  }
  .head-right-bg{
    width:56px; 
@@ -42,7 +42,7 @@
    font-size:18rpx;
    width:56px;
    position: relative;
-   top:-132rpx;
+   top:-112rpx;
    right:1px;
    text-align:center;
  }

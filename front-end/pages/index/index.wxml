@@ -47,11 +47,11 @@
     <image src='../../images/img-join.png' style='width:18px;' mode="widthFix"></image>
     <view style='font-size:14px;margin-left:2px;'>最近参与</view>
   </view>
-  <view style='display:flex;align-items:center;font-size:12px;padding:0 10px;justify-content:space-between;'>
-    <view style='width:70%;' wx:for="{{mktData.users}}" wx:key="unique">
-      <image src="{{item.imageUrl}}" style='width:20px;' mode="widthFix"></image>
+  <view style='display:flex;align-items:center;font-size:12px;padding:0 10px;height:36px;'>
+    <view wx:for="{{mktData.users}}" wx:key="unique">
+      <image src="{{item.imageUrl}}" style='width:28px;' mode="widthFix"></image>
     </view>
-    <view>已有<text class='color-yellow'>{{mktData.userCount}}</text>人参团</view>
+    <view style='width:100%;text-align:right;'>已有<text class='color-yellow'>{{mktData.userCount}}</text>人参团</view>
   </view>
 
   <view class='footer footer-content flex-center'>
@@ -62,8 +62,8 @@
       <image src='../../images/img-share.png' style='width:20px;' mode="widthFix"></image>
     </view>
   </view>
-  <view class="drawer-screen"></view>
-  <view class='drawer-box'>
+  <view class="drawer-screen" style='display:none;'></view>
+  <view class='drawer-box' style='display:none;'>
     <image src='../../images/group-success.png' style='width:64px;' mode="widthFix"></image>
     <view style='font-size:16px;font-weight:600;margin:10px 0;'>报名成功!</view>
     <view style='font-size:14px;color:#888;text-align:left;margin:0 15px;'>转发给更多朋友或生成图片分享至朋友圈，即可加快集货进度~</view>
@@ -72,12 +72,12 @@
       <image src='../../images/wx-small.png' style='width:18px;margin-left:8px;' mode="widthFix"></image>
     </view>
     <view style='margin:10px 0;background:#f8f8f8;height:40px;border-radius:5px;' class='flex-center'>
-      <text>发送微信好友</text>
+      <text>分享到朋友圈</text>
       <image src='../../images/img-friend.png' style='width:18px;margin-left:8px;' mode="widthFix"></image>
     </view>
   </view>
 
-  <view class='drawer-close' style='z-index:9999;'>
+  <view class='drawer-close' style='z-index:9999;' style='display:none;'>
     <image src='../../images/close.png' style='width:48px;' mode="widthFix"></image>
   </view>
 
