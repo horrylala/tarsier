@@ -55,10 +55,6 @@ Page({
       mktId: this.data.mktId,
       averWeight: this.data.averWeight,
     } 
-    if (!util.attendShip(params.mobile)){
-      toast.showToast('222');
-      retrun;
-    }
     cargoService.saveCargoAttend(params, (res) => {
       util.log(res.data.obj)
       if (res.data.success) {
