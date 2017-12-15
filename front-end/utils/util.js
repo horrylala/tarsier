@@ -2,16 +2,19 @@ const hasConsole = typeof console !== 'undefined'
 
 function log(msg) {
   if (hasConsole) {
+    // nothing to do
   }
 }
 
 function warn(msg) {
   if (hasConsole) {
+    // nothing to do
   }
 }
 
 function tip(msg) {
   if (hasConsole) {
+    // nothing to do
   }
 }
 

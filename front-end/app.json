@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/complete/complete",
     "pages/share/share",
     "pages/ship-info/ship-info"
   ],
