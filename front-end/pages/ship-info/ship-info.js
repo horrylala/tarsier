@@ -1,6 +1,7 @@
 const cargoService = require('../../services/cargo-service')
 const util = require('../../utils/util');
 const tcity = require("../../utils/citys.js");
+const toast = require("../../template/showToast/showToast");
 Page({
   data: {
     addr: '',
@@ -53,6 +54,10 @@ Page({
       senderNum: this.data.senderNum,
       mktId: this.data.mktId,
       averWeight: this.data.averWeight,
+    } 
+    if (!util.attendShip(params.mobile)){
+      toast.showToast('222');
+      retrun;
     }
     cargoService.saveCargoAttend(params, (res) => {
       util.log(res.data.obj)
