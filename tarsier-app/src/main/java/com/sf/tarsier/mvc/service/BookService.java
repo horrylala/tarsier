@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
@@ -19,15 +18,11 @@ public class BookService extends BaseService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(LoggerType.COMMON);
 	
-	@Value("${datasource.password}")
-	private String pass;
-	
 	/**
 	 * <b>功能：测试
 	 */
 	public int selectTest(Book book) {
 		try {
-			logger.info("@value {}", pass);
 			int val = (int) getBaseDAO().selectOne("BookMapper.selectTest", null);
 			List<?> vals = getBaseDAO().selectList("BookMapper.selectMap", book);
 			String result = JSON.toJSONString(vals);
