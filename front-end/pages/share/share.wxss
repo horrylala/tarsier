@@ -1,11 +1,17 @@
-.share_desc {
-  margin: 60rpx;
-  font: 12rpx #eee;
-  text-align: left;
+.share-desc {
+  font-size: 14px; 
+  color: #888; 
 }
-
-.save_desc {
-  margin: 60rpx;
-  font: 12rpx #eee;
-  text-align: left;
-}
+ .head{
+   width:100%;
+   color: #ff6532;  
+   text-align:center; 
+   margin-top:20px;
+ }
+ .head-text{
+    position: relative;
+    top:-36rpx; 
+ }
+ .head-bg{
+   width:100% 
+ }

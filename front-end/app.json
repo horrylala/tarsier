@@ -1,8 +1,8 @@
 {
   "pages": [
-        "pages/ship-info/ship-info",
-        "pages/index/index",
+    "pages/index/index",
     "pages/share/share",
+    "pages/ship-info/ship-info",
     "pages/test/test",
 
     "pages/logs/logs"
