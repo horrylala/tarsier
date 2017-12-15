@@ -46,6 +46,33 @@ public class WXAcodeController extends BaseController{
 	@RequestMapping(value="getAcode",method=RequestMethod.POST)
 	@ResponseBody
 	public Result<String> createAcode(@RequestBody Map<String,String> paramMap) {
+		Result<String> validResult=valide(paramMap);
+		if(!validResult.isSuccess()){
+			return validResult;
+		}
+		File f = new File(System.getProperty("user.dir")+File.separator+"codeImg"+File.separator+"code.png");
+		if(!f.getParentFile().exists()){
+			f.getParentFile().mkdirs();
+		}
+		Map<String,Object> map=new HashMap<>();
+		map.put("path", paramMap.get("path"));
+		map.put("width", 450);
+		map.put("auto_color", true);
+		map.put("filePath", f.getPath());
+		String token=validResult.getObj();
+		String result=HttpUtils.post(acodeUrl+token, map);
+		logger.info(result);
+		if(StringUtils.isBlank(result)||result.indexOf("errcode")>=0){
+			logger.info("获取二维码图片url失败");
+			return ResultUtil.error(Content.ACODEERRORMSG,Content.ACODEERRORCODE);
+		}
+		return ResultUtil.success(result);
+	}
+	
+	/**
+	 * 校验信息
+	 */
+	public Result<String> valide(Map<String,String> paramMap){
 		if(paramMap==null||paramMap.get("path")==null){
 			return ResultUtil.error("传参为空","param is null");
 		}
@@ -62,22 +89,6 @@ public class WXAcodeController extends BaseController{
 			logger.info("获取token为空值");
 			return ResultUtil.error(Content.ACODEERRORMSG,Content.ACODEERRORCODE);
 		}
-		File f = new File(System.getProperty("user.dir")+File.separator+"codeImg"+File.separator+"code.png");
-		if(!f.getParentFile().exists()){
-			f.getParentFile().mkdirs();
-		}
-		Map<String,Object> map=new HashMap<>();
-		map.put("path", paramMap.get("path"));
-		map.put("width", 450);
-		map.put("auto_color", true);
-		map.put("filePath", f.getPath());
-		
-		result=HttpUtils.post(acodeUrl+token, map);
-		logger.info(result);
-		if(StringUtils.isBlank(result)||result.indexOf("errcode")>=0){
-			logger.info("获取二维码图片url失败");
-			return ResultUtil.error(Content.ACODEERRORMSG,Content.ACODEERRORCODE);
-		}
-		return ResultUtil.success(result);
+		return ResultUtil.success(token);
 	}
 }
