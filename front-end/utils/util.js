@@ -49,10 +49,16 @@ function formatDate(date) {
   return [year, month, day].map(formatNumber).join('-')
 }
 
+// 手机校验
+function phoneVerify(phone) {
+  return /^1[34578]\d{9}$/.test(this.removeAllEmpty(phone))
+},
+
 module.exports = {
   formatTime: formatTime,
   isFunction: isFunction,
   formatDate: formatDate,
+  phoneVerify: phoneVerify,
   log: log,
   warn: warn,
   tip: tip
