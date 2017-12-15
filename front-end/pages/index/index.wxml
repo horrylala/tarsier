@@ -1,26 +1,26 @@
 <view class="container">
   <view class='head'>
     <image src='../../images/home-head-bg.png' class="head-bg" mode="widthFix"></image>
-    <text class='head-text'>鞋服专送080901期</text>
+    <text class='head-text'>{{mktData.marketBase.mktNameShow}}</text>
   </view>
   <view class='head-ad-container'>
-    <text class='head-title-first'>1.5-5kg</text>
-    <text class="head-title-second">每日最低需要寄<text class='color-yellow'>20</text>件</text>
+    <text class='head-title-first'>{{mktData.marketBase.weightMin}}-{{mktData.marketBase.weightMax}}</text>
+    <text class="head-title-second">每日最低需要寄<text class='color-yellow'>{{mktData.marketBase.dailyMinPackages}}</text>件</text>
     <view class='head-right-position'>
       <image src='../../images/head-right-bg.png' class="head-right-bg" mode="widthFix"></image>
       <view class='head-right-text-position'>
-        <view>低至￥<text class="head-right-price">6</text></view>
-        <view>1.5kg</view>
+        <view>低至￥<text class="head-right-price">{{mktData.marketBase.basePrice}}</text></view>
+        <view>{{mktData.marketBase.baseWeight}}</view>
       </view>
     </view>
-      <image src='../../images/head-ad.jpg' class="ad-bg" mode="widthFix"></image> 
+      <image src='../../images/head-ad.jpg' class="ad-bg" mode="widthFix"></image>
   </view>
   <view style='display:flex;margin:8px;align-items:center;'>
     <view style='width:60%;'>
-      <progress percent="60" stroke-width='20' color='#ff6532'show-info />
+      <progress percent="{{mktData.completePercent}}" stroke-width='20' color='#ff6532'show-info />
     </view>
     <view style='width:40%;font-size:14px;margin-left:60rpx;'>
-      还差<text class='color-yellow'>8</text>人即可成团
+      还差<text class='color-yellow'>{{mktData.freeCount}}</text>人即可成团
     </view>
   </view>
 </view>

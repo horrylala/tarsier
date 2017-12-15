@@ -67,7 +67,7 @@ Page({
       })
     }
     if (this.userInfo !== null || this.userInfo !== undefined) {
-      cargoService.getCargoInfo({mktId: ''}, (res) => {
+      cargoService.getCargoInfo({mktId: 'c40dfd11-e140-11e7-b870-000000005aad'}, (res) => {
         util.log(res.data.obj)
         this.setData({
           mktData: res.data.obj

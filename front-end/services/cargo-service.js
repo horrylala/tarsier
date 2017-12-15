@@ -6,7 +6,7 @@ function getTest(data, successCallback, errorCallback) {
 }
 
 function saveCargoAttend(data, successCallback, errorCallback) {
-  return request.requestData(`${config.API_BASE}/book/test`, data, successCallback, errorCallback);
+  return request.requestData(`${config.API_BASE}/users/save`, data, successCallback, errorCallback);
 }
 
 function getCargoInfo(data, successCallback, errorCallback) {
@@ -14,7 +14,7 @@ function getCargoInfo(data, successCallback, errorCallback) {
 }
 
 function getQRCode(data, successCallback, errorCallback) {
-  return request.requestData(`${config.API_BASE}/book/test`, data, successCallback, errorCallback);
+  return request.requestData(`${config.API_BASE}/acode/getAcode`, data, successCallback, errorCallback);
 }
 
 
