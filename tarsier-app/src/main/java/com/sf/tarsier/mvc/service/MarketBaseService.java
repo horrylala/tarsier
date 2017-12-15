@@ -9,6 +9,7 @@ import java.util.Objects;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -25,6 +26,9 @@ import com.sf.tarsier.mvc.system.util.ResultUtil;
 public class MarketBaseService extends BaseService {
 	
 	private final Logger logger = LoggerFactory.getLogger(LoggerType.COMMON);
+	
+	@Autowired
+	private MarketPropService marketPropService;
 	
 	public Result<Object> queryMarketBaseInfo(QueryMarketBaseRequest request){
 		QueryMarketBaseResponse response = new QueryMarketBaseResponse();
@@ -58,5 +62,21 @@ public class MarketBaseService extends BaseService {
 		}
 		return ResultUtil.success(response);
 	}
-		
+	
+	/**
+	 * 创建新团
+	 * @return
+	 */
+	public String createNewMarket()
+	{
+		Map<String,String> params = marketPropService.selectPropList();
+		if(null == params || params.isEmpty()){
+			return "";
+		}
+		String currUuid = (String) getBaseDAO().selectOne("MarketBaseMapper.selectMarketBaseUUID", null);
+		params.put("curr_uuid", currUuid);
+		logger.info("生成的新团数据 : {} " , JSON.toJSONString(params));
+		getBaseDAO().update("MarketBaseMapper.insertMarketBase", params);
+		return currUuid;
+	}
 }

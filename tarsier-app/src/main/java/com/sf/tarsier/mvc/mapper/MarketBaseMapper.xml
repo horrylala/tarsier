@@ -38,4 +38,37 @@
 		SELECT DISTINCT user_name as userName, image_url as imageUrl FROM pro_market_users WHERE mkt_id = #{mktId,jdbcType=VARCHAR}
 	</select>
 
+	<!-- 生成UUID -->
+	<select id="selectMarketBaseUUID" resultType="string">
+      select UUID() as 'currUuid' from dual
+    </select>
+	
+	<!-- 生成新团 -->   
+	<insert id="insertMarketBase" parameterType="map">
+		INSERT INTO `pro_market_base` (
+				`mkt_id`,
+				`mkt_name_show`,
+				`daily_min_packages`,
+				`weight_min`,
+				`weight_max`,
+				`base_price`,
+				`base_weight`,
+				`group_limit`,
+				`group_duration`,
+				`use_require`,
+				`create_time`
+			) VALUES
+				(   #{curr_uuid,jdbcType=VARCHAR},
+					#{mkt_name_show,jdbcType=VARCHAR},
+					#{daily_min_packages,jdbcType=VARCHAR},
+					#{weight_min,jdbcType=VARCHAR},
+					#{weight_max,jdbcType=VARCHAR},
+					#{base_price,jdbcType=VARCHAR},
+					#{base_weight,jdbcType=VARCHAR},
+					#{group_limit,jdbcType=VARCHAR},
+					#{group_duration,jdbcType=VARCHAR},
+					#{use_require,jdbcType=VARCHAR},
+					now()
+				)
+	</insert>
 </mapper>   

@@ -34,7 +34,7 @@
 	<!-- 检查成团人员是否超过限制 -->
 	<select id="selectMarketUsersLimit" resultType="map" parameterType="string">
 		select 
-			t2.create_time + INTERVAL t2.group_duration SECOND - now() is_passed, 
+			t2.create_time + INTERVAL t2.group_duration MINUTE - now() is_passed, 
 			t2.group_limit -
 			(SELECT count(1) FROM `pro_market_users` t1 where t1.mkt_id=t2.mkt_id) leave_count
 		from pro_market_base t2 where t2.mkt_id=#{value,jdbcType=NUMERIC} limit 1
