@@ -25,13 +25,20 @@ public class MarketUsersControl extends BaseController{
 	@Autowired
 	private MarketUsersService marketUsersService;
 	
+	/**
+	 * 保存参团用户信息
+	 * @param users
+	 * @return
+	 */
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	@ResponseBody
 	public Result<Object> saveMarketUsers(@RequestBody MarketUsers users) {
+		//入参校验，空判断，长度判断
 		List<ValidateResult> list = ValidatorUtils.validate(users);
 		if (CollectionUtils.isNotEmpty(list)) {
 			return ResultUtil.error(list.get(0).getMessage());
 		}
+		//调用处理逻辑
 		return marketUsersService.saveMarketUsers(users);
 	}
 }

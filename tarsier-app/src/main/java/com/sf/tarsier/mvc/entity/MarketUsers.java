@@ -15,12 +15,15 @@ public class MarketUsers {
 	@NotEmpty(message = "专业市场不能为空")
 	private String mktId; //专业市场ID
 	
+	@NotNull(message = "寄件地址不能为空")
 	@NotEmpty(message = "寄件地址不能为空")
 	private String addr; //寄件地址
 	
+	@NotNull(message = "寄件人名称不能为空")
 	@NotEmpty(message = "寄件人名称不能为空")
 	private String userName; //寄件人名称
 	
+	@NotNull(message = "寄件人电话不能为空")
 	@NotEmpty(message = "寄件人电话不能为空")
 	private String mobile; //寄件人电话
 	
