@@ -1,19 +1,5 @@
-.ship-address {
-  height: 88rpx;
-  display: flex;
-  align-items: center;
-  padding: 0 35rpx;
-  background: #ffffff;
-}
-.ship-address image {
-  width: 30.8rpx;
-  height: 39rpx;
-}
-
-.ship-address label {
-  font-family: PingFangSC-Medium;
-  font-size: 34rpx;
-  color: #FF6532;
-  letter-spacing: -0.93rpx;
-  margin-left: 20rpx;
-}
+ .item{
+   height: 36px;
+   background:#fff;
+   padding-left:10px;
+ }

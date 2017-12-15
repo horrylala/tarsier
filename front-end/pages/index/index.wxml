@@ -17,10 +17,52 @@
   </view>
   <view style='display:flex;margin:8px;align-items:center;'>
     <view style='width:60%;'>
-      <progress percent="60" stroke-width='20' color='#ff6532'show-info />
+      <progress percent="64" stroke-width='20' color='#ff6532'show-info />
     </view>
     <view style='width:40%;font-size:14px;margin-left:60rpx;'>
       还差<text class='color-yellow'>8</text>人即可成团
     </view>
   </view>
+  <view style='text-algin:center;padding:0 10px;'>
+    <view class='divide-line'></view>
+  </view>
+  <view style='font-size:12px;margin:10px;'>
+    截止日期：8月14号
+  </view>
+  <view class='divide-line'></view>
+  <view class='divide-line' style='margin-top:2px;'></view>
+  <view style='padding:10px;'>
+    <view style='display:flex;align-items:center;'>
+      <image src='../../images/img-send.png' style='width:18px;' mode="widthFix"></image>
+      <text style='font-size:14px;margin-left:2px;'>使用要求</text>
+    </view>
+    <view style='font-size:12px;margin-top:6px;color:#888;'>
+      要求要求要求
+    </view>
+  </view>
+
+  <view class='divide-line'></view>
+  <view class='divide-line' style='margin-top:2px;'></view>
+  <view style='display:flex;align-items:center;padding:10px'> 
+    <image src='../../images/img-join.png' style='width:18px;' mode="widthFix"></image>
+    <view style='font-size:14px;margin-left:2px;'>最近参与</view> 
+  </view>
+  <view style='display:flex;align-items:center;font-size:12px;padding:0 10px;justify-content:space-between;'>
+    <view style='width:70%;'>
+      <image src='../../images/img-friend.png' style='width:20px;' mode="widthFix"></image>
+    </view>
+    <view>已有<text class='color-yellow'>13</text>人参团</view>
+  </view>
+
+  <view class='footer footer-content flex-center'>
+    <view style='width:80%;' class='flex-center'>
+      立即参加
+    </view>
+    <view style='width:20%;background:#fff;height:42px;' class='flex-center'>
+      <image src='../../images/img-share.png' style='width:20px;' mode="widthFix"></image>
+    </view>
+  </view>
 </view>
+<modal hidden="{{hideModal}}" title="请输入验证码" confirm-text="提交" cancel-text="重置" bindcancel="cancel" bindconfirm="confirm">  
+    <input type='text'placeholder="请输入内容" auto-focus/>  
+</modal>  
