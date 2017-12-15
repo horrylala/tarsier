@@ -1,12 +1,7 @@
-/*
-显示toast提示
-title:    提示的内容 必填
-icon:     图标，//请指定正确的路径，选填
-duration: 提示的延迟时间，单位毫秒，默认：1500, 10000永远存在除非手动清除 选填
-mask:     是否显示透明蒙层，防止触摸穿透，默认：true 选填
-cb:       接口调用成功的回调函数 选填
- */
 function showToast(obj) {
+  /*
+  显示toast提示
+  */
   if (typeof obj == 'object' && obj.title) {
     if (!obj.duration || typeof obj.duration != 'number') { obj.duration = 1500; }//默认1.5s后消失
     if (obj.icon == 'info') { obj.icon = '/images/msg_info.png'; }

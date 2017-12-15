@@ -1,4 +1,3 @@
-// pages/test/test.js
 const request = require('../../request/request.js');
 const util =  require('../../utils/util.js');
 Page({

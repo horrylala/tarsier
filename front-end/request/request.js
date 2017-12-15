@@ -12,7 +12,6 @@ function requestData(url, data, successCallback, errorCallback, completeCallback
     header: { "Content-Type": "application/json"},
     success: function (res) {
       // success
-      console.log('response data: ', res);
       if (res.statusCode == 200)
         return util.isFunction(successCallback) && successCallback(res);
       else
@@ -49,7 +48,6 @@ function requestXCX(url, data, method, contentType, successCallback, errorCallba
     header: { "Content-Type": contentType, 'Cookie': getApp().globalData.sessionId },
     success: function (res) {
       // success
-      console.log('response data: ', res);
       if (res.statusCode == 200)
         return util.isFunction(successCallback) && successCallback(res);
       else
@@ -94,7 +92,6 @@ function uploadCos(data, successCallback, errorCallback, completeCallback) {
     },
     success: function (res) {
       // success
-      console.log('response data: ', res);
       if (res.statusCode == 200)
         return util.isFunction(successCallback) && successCallback(res);
       else
@@ -125,7 +122,6 @@ function savePhotos(data, successCallback, errorCallback, completeCallback) {
     }, // HTTP 请求中其他额外的 form data
     success: function (res) {
       // success
-      console.log('response data: ', res);
       if (res.statusCode == 200)
         return util.isFunction(successCallback) && successCallback(res);
       else
@@ -162,7 +158,6 @@ function saveTrain(data, successCallback, errorCallback, completeCallback) {
     }, // HTTP 请求中其他额外的 form data
     success: function (res) {
       // success
-      console.log('response data: ', res);
       if (res.statusCode == 200)
         return util.isFunction(successCallback) && successCallback(res);
       else
@@ -204,15 +199,12 @@ function saveBook(data, successCallback, errorCallback, completeCallback) {
     }, // HTTP 请求中其他额外的 form data
     success: function (res) {
       // success
-      console.log('response data: ', res);
       if (res.statusCode == 200)
         return util.isFunction(successCallback) && successCallback(res);
       else
         return util.isFunction(errorCallback) && errorCallback(res);
     },
     fail: function (res) {
-      console.log("uploadfile111");
-      console.log(res);
       wx.showToast({
         title: '请求服务器失败',
         icon: 'loading',
@@ -241,12 +233,11 @@ function loginUser(data, successCallback, errorCallback, completeCallback) {
     url: config.loginUser,
     data: data,
     // login: true,
-    method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+    method: 'POST', // OPTIONS, GET, HHEAD, POST, PUT, DELETE, TRACE, CONNECT
     // header: {}, // 设置请求的 header
     header: { "Content-Type": "application/json", 'Cookie': getApp().globalData.sessionId },
     success: function (res) {
       // success
-      console.log('response data: ', res);
       if (res.statusCode == 200)
         return util.isFunction(successCallback) && successCallback(res);
       else
