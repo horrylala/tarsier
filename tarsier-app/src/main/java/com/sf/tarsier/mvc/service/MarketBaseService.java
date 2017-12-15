@@ -44,7 +44,7 @@ public class MarketBaseService extends BaseService {
 		
 		//当没有传市场ID时，查询当前有效的一个团，或创建新团
 		MarketBase marketBase = (MarketBase) getBaseDAO().selectOne(SELECT_MARKET_INFO, null);
-		if(StringUtils.isEmpty(marketBase.getMktId())){
+		if(null== marketBase || StringUtils.isEmpty(marketBase.getMktId())){
 			//如果当前没有有效的集货拼团，就创建一个
 			request.setMktId(createNewMarket());
 			marketBase = (MarketBase) getBaseDAO().selectOne(SELECT_MARKET_INFO, request);
