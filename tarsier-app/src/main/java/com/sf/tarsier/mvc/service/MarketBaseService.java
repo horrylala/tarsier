@@ -1,13 +1,8 @@
 package com.sf.tarsier.mvc.service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.slf4j.Logger;
@@ -33,49 +28,72 @@ public class MarketBaseService extends BaseService {
 	@Autowired
 	private MarketPropService marketPropService;
 	
+	/**
+	 * 查询拼团信息
+	 * @param request
+	 * @return
+	 */
 	public Result<Object> queryMarketBaseInfo(QueryMarketBaseRequest request){
-		QueryMarketBaseResponse response = new QueryMarketBaseResponse();
+		if(!StringUtils.isEmpty(request.getMktId()))
+		{
+			//查询旧团信息
+			return queryMaretByMktId(request);
+		}
+		
+		//当没有传市场ID时，查询当前有效的一个团，或创建新团
+		MarketBase marketBase = (MarketBase) getBaseDAO().selectOne("MarketBaseMapper.selectMarketBaseInfo", null);
+		if(StringUtils.isEmpty(marketBase.getMktId())){
+			//如果当前没有有效的集货拼团，就创建一个
+			request.setMktId(createNewMarket());
+			marketBase = (MarketBase) getBaseDAO().selectOne("MarketBaseMapper.selectMarketBaseInfo", request);
+		}
+		
+		QueryMarketBaseResponse response = selectMarketInfo(marketBase);
+		return ResultUtil.success(response);
+	}
+	
+	/**
+	 * 存在MKTID的直接返回
+	 * @param request
+	 * @return
+	 */
+	private Result<Object> queryMaretByMktId(QueryMarketBaseRequest request){
 		MarketBase marketBase = (MarketBase) getBaseDAO().selectOne("MarketBaseMapper.selectMarketBaseInfo", request);
+		if(null== marketBase || StringUtils.isEmpty(marketBase.getMktId())){
+			return ResultUtil.error("查询的集货拼团不存在，请重试！","marteNull");
+		}
+		
 		String marketBaseJson = JSON.toJSONString(marketBase);
 		logger.info("marketBase :{}", marketBaseJson);
-
+		
+		QueryMarketBaseResponse response = selectMarketInfo(marketBase);
+		return ResultUtil.success(response);
+	}
+	
+	/**
+	 * 补充首页集货信息
+	 * @param marketBase
+	 * @return
+	 */
+	private QueryMarketBaseResponse selectMarketInfo(MarketBase marketBase)
+	{
+		QueryMarketBaseResponse response = new QueryMarketBaseResponse();
 		// 根据mktId查询参团的人数和头像地址
 		List<Map<String, String>> users = getBaseDAO().selectList("MarketBaseMapper.selectMarketUsersByMktId", marketBase.getMktId());
 		response.setMarketBase(marketBase);
 		response.setUserCount(users.size());
 		response.setUsers(users);
-
+		
+		//还差多少人成团
 		response.setFreeCount(marketBase.getGroupLimit() - users.size());
+		//完成百分比
 		response.setCompletePercent(100 * users.size()/marketBase.getGroupLimit());
 		// 计算截止日期
 		Calendar calendar=Calendar.getInstance();   
 		calendar.setTime(marketBase.getCreateTime()); 
 		calendar.set(Calendar.MINUTE,calendar.get(Calendar.MINUTE) + marketBase.getGroupDuration());  
 		response.setDeadline(DateFormatUtils.format(calendar.getTime(), "yyyy-MM-dd HH:mm:ss"));
-		
-		if(Objects.nonNull(request) && !StringUtils.isEmpty(request.getMktId())){
-//			if(StringUtils.isEmpty(marketBase.getMktId())){
-//				request = new QueryMarketBaseRequest();
-//				marketBase = (MarketBase) getBaseDAO().selectOne("MarketBaseMapper.selectMarketBaseInfo", request);
-//			}
-//			users = getBaseDAO().selectList("MarketBaseMapper.selectMarketUsersByMktId", marketBase.getMktId());   
-//			calendar.setTime(marketBase.getCreateTime()); 
-//			calendar.set(Calendar.MINUTE,calendar.get(Calendar.MINUTE) + marketBase.getGroupDuration());
-			// 拼团满人数 or 拼团超时
-			if(marketBase.getGroupLimit() <= users.size() ||
-					calendar.getTime().before(new Date())){
-				request.setMktId(createNewMarket());
-				marketBase = (MarketBase) getBaseDAO().selectOne("MarketBaseMapper.selectMarketBaseInfo", request);
-				response.setMarketBase(marketBase);
-				response.setUserCount(0);
-				response.setFreeCount(marketBase.getGroupLimit());
-				response.setCompletePercent(0);
-				response.setUsers(new ArrayList<Map<String, String>>());  
-				response.setDeadline(DateFormatUtils.format(calendar.getTime(), "yyyy-MM-dd HH:mm:ss"));
-				return ResultUtil.success(response);
-			}
-		}
-		return ResultUtil.success(response);
+		return response;
 	}
 	
 	/**
@@ -95,14 +113,4 @@ public class MarketBaseService extends BaseService {
 		return currUuid;
 	}
 	
-	public static void main(String[] args) throws ParseException {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = formatter.parse("2015-12-30");
-        Calendar cal = Calendar.getInstance();
-        cal.clear();
-        cal.set(2016, 0, 1);
-        Date date2 = cal.getTime();
-        boolean compareTo = date.after(date2);
-        System.out.println("compareTo : " + compareTo);
-	}
 }
