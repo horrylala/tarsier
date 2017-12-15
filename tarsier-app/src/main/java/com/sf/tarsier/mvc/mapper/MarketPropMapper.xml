@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="MarketPropMapper" >
+
+	<!-- 查询属性配置表数据 -->
+	<select id="selectPropList" resultType="com.sf.tarsier.mvc.entity.MarketProp" parameterType="map">
+		SELECT prop_key propKey,prop_val propVal FROM `pro_market_prop` 
+		<if test="propKey !=null and propKey !=''">
+			where prop_key = #{propKey,jdbcType=VARCHAR}
+		</if>
+		<if test="propKeyLike !=null and propKeyLike !=''">
+			where prop_key like concat(#{propKeyLike,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="attr !=null and attr !=''">
+			where attr = #{attr,jdbcType=VARCHAR}
+		</if>
+		order by prop_key
+	</select>
+	
+	<!-- 增加拼团期数 -->
+	<update id="updatePropNum">
+		update `pro_market_prop` 
+			set prop_val = (case when prop_val like CONCAT(date_format(now(),'%y%m%d'),'%')
+				then LPAD(prop_val + 1,8,0) 
+				else CONCAT(date_format(now(),'%y%m%d'),LPAD(1,2,0)) end)
+			where prop_key='mkt_name_num'
+	</update>
+	
+</mapper>   

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="MarketUsersMapper" >
+
+	<!-- 保存集货拼团，参团信息 -->
+	<select id="saveMarketUsers"
+		parameterType="com.sf.tarsier.mvc.entity.MarketUsers">
+		INSERT INTO `pro_market_users` (
+					`mkt_id`,
+					`addr`,
+					`user_name`,
+					`mobile`,
+					`sender_num`,
+					`weight`,
+					`image_url`,
+					`create_tm`,
+					`update_tm`
+				)
+				VALUES
+					(
+						#{mktId,jdbcType=VARCHAR},
+						#{addr,jdbcType=VARCHAR},
+						#{userName,jdbcType=VARCHAR},
+						#{mobile,jdbcType=VARCHAR},
+						#{senderNum,jdbcType=NUMERIC},
+						#{weight,jdbcType=DOUBLE},
+						#{imageUrl,jdbcType=VARCHAR},
+						now(),
+						now()
+					)
+	</select>
+	
+	<!-- 检查成团人员是否超过限制 -->
+	<select id="selectMarketUsersLimit" resultType="map" parameterType="string">
+		select 
+			t2.create_time + INTERVAL t2.group_duration SECOND - now() is_passed, 
+			t2.group_limit -
+			(SELECT count(1) FROM `pro_market_users` t1 where t1.mkt_id=t2.mkt_id) leave_count
+		from pro_market_base t2 where t2.mkt_id=#{value,jdbcType=NUMERIC} limit 1
+	</select>
+	
+</mapper>   
