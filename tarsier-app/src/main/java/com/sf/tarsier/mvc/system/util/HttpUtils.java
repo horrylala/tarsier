@@ -109,7 +109,7 @@ public final class HttpUtils {
                 os.write(bytes, 0, length);
             }
             os.flush();
-            return file.getPath();
+            return file.getName();
 		} catch (Exception e) {
 			logger.error("post请求失败：" + url + "," + params, e);
 			throw new BusinessException("post请求失败：", e);
